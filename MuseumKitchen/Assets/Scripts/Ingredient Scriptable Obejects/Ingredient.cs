@@ -12,7 +12,7 @@ public class Ingredient : ScriptableObject
  
    
    [Header("Ingredient Properties")]
-   [SerializeField] string ingredientName;
-   [SerializeField] private Sprite ingredientSprite;
-   [SerializeField] private IngredientType ingredientType;
+   [SerializeField] public string ingredientName;
+   [SerializeField] public Sprite ingredientSprite;
+   [SerializeField] public IngredientType ingredientType;
 }
