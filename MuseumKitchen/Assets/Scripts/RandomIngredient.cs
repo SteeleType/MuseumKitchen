@@ -17,6 +17,20 @@ public class RandomIngredient : MonoBehaviour
        ingredientName.text = currentFilling.ingredientName;
        ingredientPrefab.GetComponent<SpriteRenderer>().sprite = currentFilling.ingredientSprite;
     }
+
+    public void CookingMethod()
+    {
+        Ingredient currentCooking = cookingMethodList[Random.Range(0, cookingMethodList.Count)];
+        ingredientName.text = currentCooking.ingredientName;
+        ingredientPrefab.GetComponent<SpriteRenderer>().sprite = currentCooking.ingredientSprite;
+    }
+
+    public void WrappingMethod()
+    {
+        Ingredient currentWrapping = wrappingList[Random.Range(0, wrappingList.Count)];
+        ingredientName.text = currentWrapping.ingredientName;
+        ingredientPrefab.GetComponent<SpriteRenderer>().sprite = currentWrapping.ingredientSprite;
+    }
     
     
 }
