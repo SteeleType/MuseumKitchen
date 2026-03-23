@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Wheat Dough
   m_EditorClassIdentifier: 
   ingredientName: Wheat Dough
-  ingredientSprite: {fileID: 0}
+  ingredientSprite: {fileID: -8776949639154671797, guid: fb4f25687466d5843914cf9a4a2ef3b9, type: 3}
   ingredientType: 1

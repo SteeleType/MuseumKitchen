@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Thin Wheat
   m_EditorClassIdentifier: 
   ingredientName: Thin Wheat
-  ingredientSprite: {fileID: -8776949639154671797, guid: fb4f25687466d5843914cf9a4a2ef3b9, type: 3}
+  ingredientSprite: {fileID: 3149845741827702757, guid: ad1d38463efa8974c96835e11a00df49, type: 3}
   ingredientType: 1
