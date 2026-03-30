@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.antigravity.ide": {
+      "version": "https://github.com/billythekidz/UnityAntigravityIDE.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3520075082911bf236ade261e544078a3f9bed65"
+    },
     "com.unity.2d.animation": {
       "version": "13.0.4",
       "depth": 1,
@@ -205,6 +212,13 @@
     "com.unity.nuget.mono-cecil": {
       "version": "1.11.6",
       "depth": 3,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.2",
+      "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
