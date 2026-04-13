@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef898ffde58f64c2a8bec78e76cbc1b3, type: 3}
-  m_Name: Kheer
+  m_Name: KheerSaffron
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Kheer
   dishSprite: {fileID: 0}
   countryOfOrigin: Nepal
   region: 2
-  spice: 1
+  spice: 5
   cookingMethod: 1
-  distanceTraveled: 600
+  distanceTraveled: 2000
