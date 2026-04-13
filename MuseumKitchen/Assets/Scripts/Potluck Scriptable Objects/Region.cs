@@ -5,5 +5,6 @@ public enum Region
   Europe,
   Asia,
   SouthAsia,
-  MiddleEast
+  MiddleEast,
+  NorthAfrica
 }
