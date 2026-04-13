@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef898ffde58f64c2a8bec78e76cbc1b3, type: 3}
-  m_Name: CarrotCake
+  m_Name: Pastilla
   m_EditorClassIdentifier: Assembly-CSharp::Dish
-  dishName: Carrot Cake
+  dishName: Pastilla
   dishSprite: {fileID: 0}
-  countryOfOrigin: England
-  region: 0
-  spice: 3
-  cookingMethod: 0
-  distanceTraveled: 7300
+  countryOfOrigin: Morocco
+  region: 4
+  spice: 6
+  cookingMethod: 2
+  distanceTraveled: 5000
