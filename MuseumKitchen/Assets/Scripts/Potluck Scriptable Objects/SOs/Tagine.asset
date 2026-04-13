@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef898ffde58f64c2a8bec78e76cbc1b3, type: 3}
-  m_Name: KabobKoobideh
+  m_Name: Tagine
   m_EditorClassIdentifier: Assembly-CSharp::Dish
-  dishName: Kabob Koobideh
+  dishName: Tagine
   dishSprite: {fileID: 0}
-  countryOfOrigin: Iran
-  region: 3
-  spice: 4
-  cookingMethod: 0
-  distanceTraveled: 500
+  countryOfOrigin: Morocco
+  region: 4
+  spice: 5
+  cookingMethod: 1
+  distanceTraveled: 3000
