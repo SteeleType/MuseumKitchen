@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: ef898ffde58f64c2a8bec78e76cbc1b3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - spiceManager: {fileID: 2265169957925886674, guid: c11d26e1f3c864e59819ebede93e2769, type: 3}
+  - dishSprite: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
