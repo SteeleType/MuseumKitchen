@@ -62,6 +62,9 @@ sysinfo.txt
 *.unitypackage.meta
 *.app
 
+# Local WebGL/standalone build outputs (not source)
+/builds/
+
 # Crashlytics generated file
 crashlytics-build.properties
 
