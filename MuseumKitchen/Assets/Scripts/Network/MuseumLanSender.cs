@@ -1,3 +1,7 @@
+// Legacy UDP-LAN sender. Replaced by FirebaseSender for WebGL/cloud delivery.
+// Compiled out on WebGL because UnityEngine WebGL strips System.Net.Sockets.
+// 旧的局域网 UDP 发送器；WebGL 不编译；保留是为了 Standalone 端兼容旧场景。
+#if !UNITY_WEBGL || UNITY_EDITOR
 using UnityEngine;
 using System.Net.Sockets;
 using System.Net;
@@ -37,3 +41,4 @@ public class MuseumLanSender : MonoBehaviour
         }
     }
 }
+#endif

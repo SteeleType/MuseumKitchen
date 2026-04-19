@@ -403,6 +403,8 @@ GameObject:
   m_Component:
   - component: {fileID: 111892178}
   - component: {fileID: 111892179}
+  - component: {fileID: 111892181}
+  - component: {fileID: 111892180}
   m_Layer: 5
   m_Name: RevealObjects
   m_TagString: Untagged
@@ -458,6 +460,34 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &111892180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111892177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3141dde93ccfb0448f07900663731d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DishRevealController
+  revealDuration: 3.5
+  returnScene: Kitchen
+--- !u!114 &111892181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111892177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3141dde93ccfb0448f07900663731d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DishRevealController
+  revealDuration: 3.5
+  returnScene: Kitchen
 --- !u!1 &162717174
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,6 +729,8 @@ GameObject:
   - component: {fileID: 1125878041}
   - component: {fileID: 1125878040}
   - component: {fileID: 1125878039}
+  - component: {fileID: 1125878044}
+  - component: {fileID: 1125878043}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -789,6 +821,34 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1125878043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125878038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864babd0f7062034fbf4ae998a377f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RuntimeBackButton
+  targetScene: StartScene
+  buttonLabel: "\u2190 Back"
+--- !u!114 &1125878044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125878038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864babd0f7062034fbf4ae998a377f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RuntimeBackButton
+  targetScene: StartScene
+  buttonLabel: "\u2190 Back"
 --- !u!1 &1417263436
 GameObject:
   m_ObjectHideFlags: 0

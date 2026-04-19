@@ -1,13 +1,13 @@
+// Legacy UDP-LAN receiver. Replaced by FirebaseReceiver for WebGL/cloud delivery.
+// Kept compiled only on non-WebGL targets so existing scenes still load on Standalone builds.
+// 旧的局域网 UDP 接收器；WebGL 不编译；保留是为了 Standalone 端兼容旧场景。
+#if !UNITY_WEBGL || UNITY_EDITOR
 using UnityEngine;
-using UnityEngine.Events;
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using System.Collections.Concurrent;
 using System.Threading;
-
-[System.Serializable]
-public class PotluckEvent : UnityEvent<PotluckData> { }
 
 public class MuseumLanReceiver : MonoBehaviour
 {
@@ -127,3 +127,4 @@ public class MuseumLanReceiver : MonoBehaviour
         }
     }
 }
+#endif

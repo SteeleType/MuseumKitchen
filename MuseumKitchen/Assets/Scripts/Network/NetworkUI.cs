@@ -1,3 +1,7 @@
+// LAN-mode network UI. Not used in cloud (Firebase) mode; compiled out on WebGL because
+// it depends on System.Net.Sockets and on the MuseumLanSender type (also #if'd).
+// 局域网模式的 IP 面板；Firebase 模式不需要；WebGL 不编译。
+#if !UNITY_WEBGL || UNITY_EDITOR
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -8,10 +12,6 @@ using System.Net.Sockets;
 /// Runtime-created network UI panel. Two modes:
 ///   Host mode: only displays local IP (for the big screen receiver)
 ///   Client mode: displays local IP + target IP input field
-///
-/// 运行时自动创建的网络UI面板，两种模式：
-///   主机模式：仅显示本机IP（大屏接收端）
-///   客户端模式：显示本机IP + 目标IP输入框
 /// </summary>
 public class NetworkUI : MonoBehaviour
 {
@@ -225,3 +225,4 @@ public class NetworkUI : MonoBehaviour
             _targetIPInput.onEndEdit.RemoveListener(OnTargetIPChanged);
     }
 }
+#endif

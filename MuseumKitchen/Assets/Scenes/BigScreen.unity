@@ -299,9 +299,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1153482821}
-  - component: {fileID: 1153482820}
   - component: {fileID: 1153482819}
   - component: {fileID: 1153482818}
+  - component: {fileID: 1153482822}
   m_Layer: 0
   m_Name: BigScreenManager
   m_TagString: Untagged
@@ -335,28 +335,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8502a034e8c821478771dbeb0dccf28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PotluckManager
-  maxCards: 12
-  cardLifetime: 60
-  columns: 4
+  maxCards: 30
+  cardLifetime: 0
+  columns: 6
   cardSpacing: {x: 20, y: 20}
-  cardSize: {x: 320, y: 180}
-  gridOffset: {x: 40, y: -120}
---- !u!114 &1153482820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1153482817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5005169d27811394eba44545d1344772, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MuseumLanReceiver
-  listenPort: 9001
-  OnDataReceived:
-    m_PersistentCalls:
-      m_Calls: []
+  cardSize: {x: 320, y: 220}
+  gridOffset: {x: 40, y: -180}
+  roundDuration: 30
+  settlementHold: 12
+  title: Today's Museum Potluck
+  subtitle: "Build a dumpling on a tablet \u2014 it shows up here."
+  emptyStateText: Waiting for our chefs...
 --- !u!4 &1153482821
 Transform:
   m_ObjectHideFlags: 0
@@ -372,6 +361,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1153482822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153482817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24605358dc5b7db41a3a823ab4b86490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FirebaseReceiver
+  config: {fileID: 11400000, guid: 5f7e8de156ad7a84db72f44c5d840618, type: 2}
+  pollInterval: 0.4
+  fetchLimit: 50
+  ignoreHistoryOnStart: 1
+  OnDataReceived:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1628626193
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,6 +392,7 @@ GameObject:
   - component: {fileID: 1628626196}
   - component: {fileID: 1628626195}
   - component: {fileID: 1628626194}
+  - component: {fileID: 1628626198}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -473,6 +482,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1628626198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628626193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864babd0f7062034fbf4ae998a377f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RuntimeBackButton
+  targetScene: StartScene
+  buttonLabel: "\u2190 Back"
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
