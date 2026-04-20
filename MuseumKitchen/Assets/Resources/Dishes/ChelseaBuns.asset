@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: ChelseaBuns
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Chelsea Buns
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: -2197389460174734179, guid: 0a65b5370be3cec4c92ec8d1172d19ba, type: 3}
   countryOfOrigin: England
   region: 0
   spice: 2
   cookingMethod: 0
   distanceTraveled: 5500
+  spiceOrigin: 1

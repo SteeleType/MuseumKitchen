@@ -15,28 +15,157 @@ MonoBehaviour:
   defaultRegionZoom: 2.5
   regions:
   - region: 0
-    normalizedPos: {x: 0.5, y: 0.78}
+    normalizedPos: {x: 0.3261438, y: 0.6627451}
     zoom: 2.5
   - region: 3
-    normalizedPos: {x: 0.58, y: 0.62}
+    normalizedPos: {x: 0.43464056, y: 0.5084967}
     zoom: 2.5
   - region: 4
-    normalizedPos: {x: 0.5, y: 0.58}
+    normalizedPos: {x: 0.24901961, y: 0.4627451}
     zoom: 2.5
   - region: 2
-    normalizedPos: {x: 0.69, y: 0.55}
+    normalizedPos: {x: 0.5915033, y: 0.42352942}
     zoom: 2.5
   - region: 1
-    normalizedPos: {x: 0.78, y: 0.62}
+    normalizedPos: {x: 0.7509804, y: 0.5320261}
     zoom: 2.5
   spiceOrigins:
   - origin: 0
-    normalizedPos: {x: 0.69, y: 0.55}
+    normalizedPos: {x: 0.58235294, y: 0.42483658}
   - origin: 1
-    normalizedPos: {x: 0.71, y: 0.48}
+    normalizedPos: {x: 0.5954249, y: 0.3320261}
   - origin: 2
-    normalizedPos: {x: 0.62, y: 0.62}
+    normalizedPos: {x: 0.45686275, y: 0.5477124}
   - origin: 3
-    normalizedPos: {x: 0.8, y: 0.45}
+    normalizedPos: {x: 0.7705882, y: 0.32679737}
   - origin: 4
-    normalizedPos: {x: 0.54, y: 0.62}
+    normalizedPos: {x: 0.31960785, y: 0.55163395}
+  spiceRoutes:
+  - from: 0
+    to: 0
+    waypoints:
+    - {x: 0.47564104, y: 0.5}
+    - {x: 0.45128208, y: 0.5846154}
+    - {x: 0.42692307, y: 0.65256405}
+  - from: 0
+    to: 1
+    waypoints:
+    - {x: 0.74615383, y: 0.25256407}
+    - {x: 0.72692305, y: 0.36153847}
+    - {x: 0.77948725, y: 0.36923078}
+  - from: 0
+    to: 2
+    waypoints: []
+  - from: 0
+    to: 3
+    waypoints:
+    - {x: 0.5153846, y: 0.4833333}
+  - from: 0
+    to: 4
+    waypoints:
+    - {x: 0.4576923, y: 0.50769234}
+    - {x: 0.37179488, y: 0.5243589}
+    - {x: 0.33333334, y: 0.47948715}
+  - from: 1
+    to: 4
+    waypoints:
+    - {x: 0.41666672, y: 0.37820512}
+    - {x: 0.3935898, y: 0.3564102}
+    - {x: 0.324359, y: 0.4705128}
+  - from: 1
+    to: 0
+    waypoints:
+    - {x: 0.54102564, y: 0.35128203}
+    - {x: 0.5307692, y: 0.42435896}
+    - {x: 0.48717952, y: 0.5282051}
+    - {x: 0.40641028, y: 0.52692306}
+    - {x: 0.3871795, y: 0.63461536}
+  - from: 1
+    to: 1
+    waypoints:
+    - {x: 0.7525642, y: 0.26923078}
+    - {x: 0.74230766, y: 0.35256407}
+    - {x: 0.7910257, y: 0.3923077}
+  - from: 1
+    to: 2
+    waypoints:
+    - {x: 0.5769231, y: 0.37435895}
+  - from: 1
+    to: 3
+    waypoints:
+    - {x: 0.55256414, y: 0.3423077}
+    - {x: 0.5307692, y: 0.42948714}
+    - {x: 0.5, y: 0.5}
+  - from: 2
+    to: 3
+    waypoints: []
+  - from: 3
+    to: 3
+    waypoints:
+    - {x: 0.7076923, y: 0.26025638}
+    - {x: 0.5769231, y: 0.34358972}
+    - {x: 0.5576923, y: 0.4551282}
+  - from: 2
+    to: 0
+    waypoints:
+    - {x: 0.4076923, y: 0.53205127}
+    - {x: 0.3025641, y: 0.5692308}
+  - from: 2
+    to: 1
+    waypoints:
+    - {x: 0.54102564, y: 0.61794865}
+    - {x: 0.7179488, y: 0.61923075}
+  - from: 2
+    to: 2
+    waypoints: []
+  - from: 2
+    to: 4
+    waypoints:
+    - {x: 0.42307693, y: 0.51025635}
+  - from: 3
+    to: 4
+    waypoints:
+    - {x: 0.7, y: 0.2564102}
+    - {x: 0.574359, y: 0.3410256}
+    - {x: 0.41923076, y: 0.37179482}
+    - {x: 0.3794872, y: 0.3705128}
+    - {x: 0.32692307, y: 0.47435895}
+  - from: 3
+    to: 2
+    waypoints:
+    - {x: 0.74230766, y: 0.25384617}
+    - {x: 0.58205134, y: 0.33846155}
+  - from: 3
+    to: 1
+    waypoints:
+    - {x: 0.79743594, y: 0.4128205}
+  - from: 3
+    to: 0
+    waypoints:
+    - {x: 0.68589747, y: 0.25128198}
+    - {x: 0.574359, y: 0.33974358}
+    - {x: 0.52307695, y: 0.44230768}
+    - {x: 0.39102566, y: 0.5192308}
+    - {x: 0.30512825, y: 0.5705128}
+  - from: 4
+    to: 0
+    waypoints:
+    - {x: 0.2794872, y: 0.5935897}
+  - from: 4
+    to: 1
+    waypoints:
+    - {x: 0.44102567, y: 0.5153846}
+    - {x: 0.5589744, y: 0.63076925}
+    - {x: 0.6961538, y: 0.58974355}
+  - from: 4
+    to: 2
+    waypoints:
+    - {x: 0.48846152, y: 0.49743587}
+  - from: 4
+    to: 3
+    waypoints: []
+  - from: 4
+    to: 4
+    waypoints:
+    - {x: 0.37820518, y: 0.53846157}
+    - {x: 0.3371795, y: 0.4730769}

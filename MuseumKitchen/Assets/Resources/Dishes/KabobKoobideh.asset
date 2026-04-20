@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: KabobKoobideh
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Kabob Koobideh
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: 5432810541662538734, guid: 38b45d544e6d17740aef8663fd6a480a, type: 3}
   countryOfOrigin: Iran
   region: 3
   spice: 4
   cookingMethod: 0
   distanceTraveled: 500
+  spiceOrigin: 4

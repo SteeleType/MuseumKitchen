@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: SheperdsPie
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Sheperd's Pie
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: -5330544942575002276, guid: 6a1d74ce5e000f5429454c0c090ba663, type: 3}
   countryOfOrigin: England
   region: 0
   spice: 0
   cookingMethod: 0
   distanceTraveled: 4200
+  spiceOrigin: 0

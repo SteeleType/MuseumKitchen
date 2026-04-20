@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Mujaddara
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Mujaddara
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: -6887320197405537862, guid: 9d6a60b5e8cdf4f42a42a4f532f2cb2e, type: 3}
   countryOfOrigin: Lebanon
   region: 3
   spice: 4
   cookingMethod: 2
   distanceTraveled: 0
+  spiceOrigin: 4

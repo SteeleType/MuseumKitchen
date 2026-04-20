@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: CarrotCakeCloves
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Carrot Cake
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: -8604515289599284625, guid: 29c145cb6f671bb458aecf140e7cdeec, type: 3}
   countryOfOrigin: England
   region: 0
   spice: 3
   cookingMethod: 0
   distanceTraveled: 7300
+  spiceOrigin: 3

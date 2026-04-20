@@ -339,7 +339,7 @@ MonoBehaviour:
   cardLifetime: 0
   columns: 6
   cardSpacing: {x: 20, y: 20}
-  cardSize: {x: 320, y: 220}
+  cardSize: {x: 320, y: 360}
   gridOffset: {x: 40, y: -180}
   roundDuration: 30
   settlementHold: 12

@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Kitchen.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
+    path: Assets/Scenes/ClientKitchen.unity
+    guid: 630750a9076c4974883bf97f2c7815f4
+  - enabled: 1
     path: Assets/Scenes/BigScreen.unity
     guid: b264f1311e629494fbdd41072b433d5e
   - enabled: 1

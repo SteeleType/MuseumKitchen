@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: MoghrabiyehCumin
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Moghrabiyeh
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: 7264307563618289093, guid: 026067ba96faaaf41b7b3af1311c176f, type: 3}
   countryOfOrigin: Lebanon
   region: 3
   spice: 4
   cookingMethod: 1
   distanceTraveled: 0
+  spiceOrigin: 4

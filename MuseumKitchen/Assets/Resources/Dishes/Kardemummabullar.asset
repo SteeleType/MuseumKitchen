@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Kardemummabullar
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Kardemummabullar
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: -2688106945562465901, guid: 65dad3656ae8009488f555dcc71d9754, type: 3}
   countryOfOrigin: Sweden
   region: 0
   spice: 1
   cookingMethod: 0
   distanceTraveled: 4000
+  spiceOrigin: 0

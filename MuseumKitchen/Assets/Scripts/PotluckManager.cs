@@ -263,6 +263,7 @@ public class PotluckManager : MonoBehaviour
         _emptyStateLabel.fontStyle = FontStyles.Italic;
         _emptyStateLabel.alignment = TextAlignmentOptions.Center;
         _emptyStateLabel.color = new Color(1f, 1f, 1f, 0.5f);
+        UIFont.Apply(_emptyStateLabel);
     }
 
     private void BuildCountdown(Transform canvasTransform)
@@ -277,6 +278,7 @@ public class PotluckManager : MonoBehaviour
         _countdownLabel.text = "30"; _countdownLabel.fontSize = 90; _countdownLabel.fontStyle = FontStyles.Bold;
         _countdownLabel.alignment = TextAlignmentOptions.Right;
         _countdownLabel.color = new Color(1f, 0.6f, 0.4f);
+        UIFont.Apply(_countdownLabel);
         go.SetActive(false);
     }
 
@@ -303,6 +305,7 @@ public class PotluckManager : MonoBehaviour
         _settlementText.alignment = TextAlignmentOptions.Center;
         _settlementText.color = Color.white; _settlementText.richText = true;
         _settlementText.enableWordWrapping = true;
+        UIFont.Apply(_settlementText);
 
         _settlementOverlay.SetActive(false);
     }
@@ -329,6 +332,7 @@ public class PotluckManager : MonoBehaviour
         var tmp = go.AddComponent<TextMeshProUGUI>();
         tmp.text = content; tmp.fontSize = size; tmp.fontStyle = style; tmp.color = color;
         tmp.alignment = align; tmp.richText = true;
+        UIFont.Apply(tmp);
         go.AddComponent<LayoutElement>().preferredHeight = preferredHeight;
     }
 }

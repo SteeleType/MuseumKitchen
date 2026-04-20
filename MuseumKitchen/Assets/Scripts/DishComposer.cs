@@ -32,6 +32,11 @@ public class DishComposer : MonoBehaviour
     [Tooltip("Coordinates SO mapping each Region/Origin to normalized map positions.\n地图坐标配置 SO。")]
     [SerializeField] private MapCoordinatesConfig mapCoords;
 
+    [Header("Cooking Method Sprites / 烹饪方式图片")]
+    [SerializeField] private Sprite panSprite;
+    [SerializeField] private Sprite potSprite;
+    [SerializeField] private Sprite ovenSprite;
+
     [Header("Submit / 提交")]
     [Tooltip("Seconds to wait after the card flies off before resetting back to the Region stage.\n卡片飞出后等多少秒重置回 Region 选择阶段。")]
     [SerializeField] private float resetDelayAfterSubmit = 1.0f;
@@ -91,7 +96,8 @@ public class DishComposer : MonoBehaviour
         var bg = NewRect("Background", hostCanvas.transform);
         Stretch(bg);
         var bgImg = bg.AddComponent<Image>();
-        bgImg.color = new Color(0.04f, 0.05f, 0.10f, 1f);
+        // Match the dark teal-navy of the world map's ocean so contain-mode side bars are invisible.
+        bgImg.color = new Color(0.06f, 0.13f, 0.18f, 1f);
 
         // Map holder (clips overflow so zoomed map doesn't bleed)
         var holder = NewRect("MapHolder", hostCanvas.transform);
@@ -111,7 +117,7 @@ public class DishComposer : MonoBehaviour
 
         var mapImg = map.AddComponent<Image>();
         mapImg.sprite = mapSprite;
-        mapImg.preserveAspect = true;
+        mapImg.preserveAspect = false; // we size the RT in cover-mode below, no need for built-in fit
         mapImg.color = new Color(1, 1, 1, 0.85f);
         FitMapToHolder();
 
@@ -131,8 +137,18 @@ public class DishComposer : MonoBehaviour
 
     private void FitMapToHolder()
     {
-        // Make the map fill the holder so zoom 1 = world view.
-        _mapRT.sizeDelta = _mapHolder.rect.size;
+        // Width-fit, vertical overflow: image width matches screen width exactly,
+        // top/bottom may overflow and get masked by the holder's RectMask2D. No side bars.
+        // 宽度对齐屏幕，垂直方向溢出被裁，左右无黑边。
+        Vector2 holderSize = _mapHolder.rect.size;
+        if (mapSprite == null || holderSize.x <= 0)
+        {
+            _mapRT.sizeDelta = holderSize;
+            return;
+        }
+        Vector2 spriteSize = mapSprite.rect.size;
+        float scale = holderSize.x / spriteSize.x;
+        _mapRT.sizeDelta = spriteSize * scale;
     }
 
     // ───────────────────── Stage 1: Region ─────────────────────
@@ -197,84 +213,174 @@ public class DishComposer : MonoBehaviour
 
     // ───────────────────── Stage 3: Cooking ─────────────────────
 
+    private GameObject _cookingTilesRow;
+
     private void EnterCookingStage()
     {
         var panel = NewStagePanel("CookingPanel");
         AddTitleBar(panel, "How do you cook it?", "Pick a method.");
 
-        var row = AddBottomBar(panel, 180f);
-        foreach (CookingMethod c in Enum.GetValues(typeof(CookingMethod)))
+        // Container for the 3 tiles (no layout group — we position by index for reliable hit areas).
+        // 3 张 tile 容器；不用 layout group，按 index 手控位置避免触摸热区错位。
+        var row = NewRect("CookingTiles", panel.transform);
+        var rRT = row.GetComponent<RectTransform>();
+        rRT.anchorMin = new Vector2(0.5f, 0.5f); rRT.anchorMax = new Vector2(0.5f, 0.5f);
+        rRT.pivot = new Vector2(0.5f, 0.5f); rRT.anchoredPosition = new Vector2(0, 0);
+        rRT.sizeDelta = new Vector2(1400, 460);
+        _cookingTilesRow = row;
+
+        var values = Enum.GetValues(typeof(CookingMethod));
+        const float Spacing = 460f; // distance between tile centers
+        int total = values.Length;
+        float startX = -Spacing * (total - 1) / 2f;
+
+        int i = 0;
+        foreach (CookingMethod c in values)
         {
             bool available = DishDatabase
                 .AvailableCookingForRegionSpice(_region.Value, _spice.Value)
                 .Contains(c);
-            var btn = MakePill(row, CookingEmoji(c) + "  " + FormatEnum(c), 240, !available);
-            if (available)
-            {
-                var captured = c;
-                btn.onClick.AddListener(() => OnPickCooking(captured));
-            }
+            float x = startX + i * Spacing;
+            BuildCookingTile(row, c, available, x);
+            i++;
         }
     }
+
+    private void BuildCookingTile(GameObject parent, CookingMethod c, bool available, float xOffset)
+    {
+        var tile = NewRect(c + "Tile", parent.transform);
+        var tRT = tile.GetComponent<RectTransform>();
+        tRT.anchorMin = new Vector2(0.5f, 0.5f); tRT.anchorMax = new Vector2(0.5f, 0.5f);
+        tRT.pivot = new Vector2(0.5f, 0.5f);
+        tRT.anchoredPosition = new Vector2(xOffset, 0);
+        tRT.sizeDelta = new Vector2(360, 440);
+
+        // Invisible raycast catcher + Button on the tile root
+        var raycastImg = tile.AddComponent<Image>();
+        raycastImg.color = new Color(0, 0, 0, 0);
+        var btn = tile.AddComponent<Button>();
+        btn.targetGraphic = raycastImg;
+        btn.interactable = available;
+
+        // Dish image
+        var imgGO = NewRect("Image", tile.transform);
+        var img = imgGO.AddComponent<Image>();
+        img.sprite = GetCookingSprite(c);
+        img.preserveAspect = true;
+        img.raycastTarget = false;
+        img.color = available ? Color.white : new Color(1, 1, 1, 0.3f);
+        var iRT = imgGO.GetComponent<RectTransform>();
+        iRT.anchorMin = new Vector2(0.5f, 1f); iRT.anchorMax = new Vector2(0.5f, 1f);
+        iRT.pivot = new Vector2(0.5f, 1f);
+        iRT.anchoredPosition = new Vector2(0, -10);
+        iRT.sizeDelta = new Vector2(300, 300);
+
+        // Label below
+        var label = NewText("Label", tile, FormatEnum(c), 32, FontStyles.Bold,
+            available ? Color.white : new Color(1, 1, 1, 0.4f), TextAlignmentOptions.Center);
+        var lRT = label.GetComponent<RectTransform>();
+        lRT.anchorMin = new Vector2(0.5f, 0f); lRT.anchorMax = new Vector2(0.5f, 0f);
+        lRT.pivot = new Vector2(0.5f, 0f); lRT.anchoredPosition = new Vector2(0, 10);
+        lRT.sizeDelta = new Vector2(300, 60);
+        label.GetComponent<TextMeshProUGUI>().raycastTarget = false;
+
+        if (available)
+        {
+            var captured = c;
+            btn.onClick.AddListener(() => OnPickCooking(captured));
+        }
+    }
+
+    private Sprite GetCookingSprite(CookingMethod c) => c switch
+    {
+        CookingMethod.Pan  => panSprite,
+        CookingMethod.Pot  => potSprite,
+        CookingMethod.Oven => ovenSprite,
+        _ => null
+    };
 
     private void OnPickCooking(CookingMethod c)
     {
         _cooking = c;
         _resolvedDish = DishDatabase.Find(_region.Value, _spice.Value, _cooking.Value);
 
-        // Quick punch animation: a giant emoji in the center
-        var burst = NewRect("CookingBurst", hostCanvas.transform);
-        var brt = burst.GetComponent<RectTransform>();
-        brt.anchorMin = new Vector2(0.5f, 0.5f); brt.anchorMax = new Vector2(0.5f, 0.5f);
-        brt.pivot = new Vector2(0.5f, 0.5f); brt.anchoredPosition = Vector2.zero;
-        brt.sizeDelta = new Vector2(400, 400);
-        var t = burst.AddComponent<TextMeshProUGUI>();
-        t.text = CookingEmoji(c);
-        t.fontSize = 240; t.alignment = TextAlignmentOptions.Center;
-        burst.transform.localScale = Vector3.zero;
-        burst.transform.DOScale(1f, 0.4f).SetEase(Ease.OutBack);
-
-        FadeOutCurrentStage();
-        DOVirtual.DelayedCall(0.7f, () =>
+        // Fade out the row of tiles
+        if (_cookingTilesRow != null)
         {
-            burst.transform.DOScale(0f, 0.25f).OnComplete(() => Destroy(burst));
-            EnterCookRevealStage();
-        });
-    }
+            var cg = _cookingTilesRow.GetComponent<CanvasGroup>() ?? _cookingTilesRow.AddComponent<CanvasGroup>();
+            cg.DOFade(0f, 0.3f);
+        }
 
-    // ───────────────────── Stage 4: Cook Reveal ─────────────────────
+        // Build a new centerpiece on the same panel: big sprite + Cook button below.
+        // 在同一个 panel 上构建新中心组：选中图（大）+ Cook 按钮在图下面。
+        var center = NewRect("CookingCenterpiece", _currentStagePanel.transform);
+        var crt = center.GetComponent<RectTransform>();
+        crt.anchorMin = new Vector2(0.5f, 0.5f); crt.anchorMax = new Vector2(0.5f, 0.5f);
+        crt.pivot = new Vector2(0.5f, 0.5f); crt.anchoredPosition = new Vector2(0, 30);
+        crt.sizeDelta = new Vector2(540, 700);
 
-    private void EnterCookRevealStage()
-    {
-        var panel = NewStagePanel("CookRevealPanel");
+        // Big cooking image
+        var imgGO = NewRect("Image", center.transform);
+        var img = imgGO.AddComponent<Image>();
+        img.sprite = GetCookingSprite(c);
+        img.preserveAspect = true;
+        img.raycastTarget = false;
+        var iRT = imgGO.GetComponent<RectTransform>();
+        iRT.anchorMin = new Vector2(0.5f, 1f); iRT.anchorMax = new Vector2(0.5f, 1f);
+        iRT.pivot = new Vector2(0.5f, 1f); iRT.anchoredPosition = new Vector2(0, 0);
+        iRT.sizeDelta = new Vector2(480, 480);
 
-        // Dim the map a bit
-        var dim = NewRect("Dim", panel.transform);
-        Stretch(dim);
-        var dimImg = dim.AddComponent<Image>();
-        dimImg.color = new Color(0, 0, 0, 0.55f);
+        // Method label
+        var lab = NewText("Label", center, FormatEnum(c), 36, FontStyles.Bold,
+            Color.white, TextAlignmentOptions.Center);
+        var lRT = lab.GetComponent<RectTransform>();
+        lRT.anchorMin = new Vector2(0.5f, 1f); lRT.anchorMax = new Vector2(0.5f, 1f);
+        lRT.pivot = new Vector2(0.5f, 1f); lRT.anchoredPosition = new Vector2(0, -490);
+        lRT.sizeDelta = new Vector2(540, 50);
 
-        // Big Cook! button center
-        var btnGO = NewRect("CookBigButton", panel.transform);
-        var brt = btnGO.GetComponent<RectTransform>();
-        brt.anchorMin = new Vector2(0.5f, 0.5f); brt.anchorMax = new Vector2(0.5f, 0.5f);
-        brt.pivot = new Vector2(0.5f, 0.5f); brt.anchoredPosition = Vector2.zero;
-        brt.sizeDelta = new Vector2(520, 200);
-        var btnImg = btnGO.AddComponent<Image>();
-        btnImg.color = new Color(0.85f, 0.35f, 0.2f, 1f);
+        // Cook button below the image+label
+        var btnGO = NewRect("CookBtn", center.transform);
+        var bRT = btnGO.GetComponent<RectTransform>();
+        bRT.anchorMin = new Vector2(0.5f, 1f); bRT.anchorMax = new Vector2(0.5f, 1f);
+        bRT.pivot = new Vector2(0.5f, 1f); bRT.anchoredPosition = new Vector2(0, -560);
+        bRT.sizeDelta = new Vector2(420, 110);
+        var bg = btnGO.AddComponent<Image>();
+        bg.color = new Color(0.85f, 0.35f, 0.2f, 1f);
         var btn = btnGO.AddComponent<Button>();
-        btn.targetGraphic = btnImg;
-        var lab = NewText("Label", btnGO, "Cook!", 80, FontStyles.Bold, Color.white, TextAlignmentOptions.Center);
-        Stretch(lab);
+        btn.targetGraphic = bg;
+        var blab = NewText("Label", btnGO, "Cook!", 50, FontStyles.Bold, Color.white, TextAlignmentOptions.Center);
+        Stretch(blab);
+        blab.GetComponent<TextMeshProUGUI>().raycastTarget = false;
 
-        btnGO.transform.localScale = Vector3.one * 0.6f;
-        btnGO.transform.DOScale(1f, 0.4f).SetEase(Ease.OutBack);
+        // Pop-in animation
+        center.transform.localScale = Vector3.one * 0.6f;
+        var ccg = center.AddComponent<CanvasGroup>();
+        ccg.alpha = 0;
+        ccg.DOFade(1f, 0.4f).SetDelay(0.15f);
+        center.transform.DOScale(1f, 0.4f).SetEase(Ease.OutBack).SetDelay(0.15f);
 
         btn.onClick.AddListener(() =>
         {
-            btnGO.transform.DOScale(0f, 0.25f).OnComplete(() => Destroy(btnGO));
-            ShowDishCard(panel);
+            FadeOutCurrentStage();
+            EnterDishRevealStage();
         });
+    }
+
+    // ───────────────────── Stage 4: Dish Reveal ─────────────────────
+
+    // Renamed from EnterCookRevealStage — Cook button now lives in OnPickCooking, so this stage
+    // just shows the dimmed dish card straight away.
+    // 之前的 Cook 大按钮已合并到 OnPickCooking，本阶段直接显示菜品卡片。
+    private void EnterDishRevealStage()
+    {
+        var panel = NewStagePanel("DishRevealPanel");
+
+        var dim = NewRect("Dim", panel.transform);
+        Stretch(dim);
+        var dimImg = dim.AddComponent<Image>();
+        dimImg.color = new Color(0, 0, 0, 0.85f);
+
+        ShowDishCard(panel);
     }
 
     private void ShowDishCard(GameObject panel)
@@ -287,47 +393,71 @@ public class DishComposer : MonoBehaviour
         irt.sizeDelta = new Vector2(700, 80);
         BuildChefInput(inputRow);
 
-        // The dish "plate" — draggable card
+        // Reveal container — no background frame; the dim panel is already behind everything.
+        // Holds the dish image (large), name + country (under image), hint (bottom), and is the drag target.
+        // 揭示容器：没有自己的背景（dim 在更后面已经盖了），大图 + 文字 + 提示，整块作为拖拽接收。
         var card = NewRect("DishPlate", panel.transform);
         var crt = card.GetComponent<RectTransform>();
         crt.anchorMin = new Vector2(0.5f, 0.5f); crt.anchorMax = new Vector2(0.5f, 0.5f);
         crt.pivot = new Vector2(0.5f, 0.5f); crt.anchoredPosition = Vector2.zero;
-        crt.sizeDelta = new Vector2(560, 560);
+        crt.sizeDelta = new Vector2(800, 900);
 
-        var cbg = card.AddComponent<Image>();
-        cbg.color = new Color(0.10f, 0.12f, 0.18f, 0.95f);
+        // Invisible raycast catcher so the entire card area accepts drags (incl. empty space around the image).
+        // 透明捕获 Image，让整块区域都能接收拖拽。
+        var rayCatcher = card.AddComponent<Image>();
+        rayCatcher.color = new Color(0, 0, 0, 0);
+        rayCatcher.raycastTarget = true;
 
-        var vlg = card.AddComponent<VerticalLayoutGroup>();
-        vlg.padding = new RectOffset(24, 24, 30, 30); vlg.spacing = 12;
-        vlg.childAlignment = TextAnchor.UpperCenter;
-        vlg.childControlWidth = true; vlg.childControlHeight = true;
-        vlg.childForceExpandWidth = true; vlg.childForceExpandHeight = false;
-
+        // Big dish image, centered upper portion
         if (_resolvedDish != null && _resolvedDish.DishSprite != null)
         {
-            var imgGO = NewRect("Sprite", card.transform);
+            var imgGO = NewRect("DishImage", card.transform);
             var img = imgGO.AddComponent<Image>();
             img.sprite = _resolvedDish.DishSprite;
             img.preserveAspect = true;
-            imgGO.AddComponent<LayoutElement>().preferredHeight = 280;
+            img.raycastTarget = false;
+            var iRT = imgGO.GetComponent<RectTransform>();
+            iRT.anchorMin = new Vector2(0.5f, 1f); iRT.anchorMax = new Vector2(0.5f, 1f);
+            iRT.pivot = new Vector2(0.5f, 1f);
+            iRT.anchoredPosition = new Vector2(0, -20);
+            iRT.sizeDelta = new Vector2(640, 640);
         }
 
+        // Dish name (under image)
         string dishName = _resolvedDish != null ? _resolvedDish.DishName : "Mystery Dish";
-        var name = NewText("Name", card, dishName, 38, FontStyles.Bold,
+        var nameGO = NewText("Name", card, dishName, 44, FontStyles.Bold,
             new Color(1f, 0.85f, 0.35f), TextAlignmentOptions.Center);
-        name.AddComponent<LayoutElement>().preferredHeight = 60;
+        var nRT = nameGO.GetComponent<RectTransform>();
+        nRT.anchorMin = new Vector2(0.5f, 1f); nRT.anchorMax = new Vector2(0.5f, 1f);
+        nRT.pivot = new Vector2(0.5f, 1f);
+        nRT.anchoredPosition = new Vector2(0, -680);
+        nRT.sizeDelta = new Vector2(800, 60);
+        nameGO.GetComponent<TextMeshProUGUI>().raycastTarget = false;
 
+        // Country (under name)
         string country = _resolvedDish != null ? _resolvedDish.CountryOfOrigin : "Unknown";
-        var origin = NewText("Origin", card, $"<i>from {country}</i>", 22, FontStyles.Italic,
+        var originGO = NewText("Origin", card, $"<i>from {country}</i>", 24, FontStyles.Italic,
             new Color(0.85f, 0.85f, 0.95f), TextAlignmentOptions.Center);
-        origin.AddComponent<LayoutElement>().preferredHeight = 32;
+        var oRT = originGO.GetComponent<RectTransform>();
+        oRT.anchorMin = new Vector2(0.5f, 1f); oRT.anchorMax = new Vector2(0.5f, 1f);
+        oRT.pivot = new Vector2(0.5f, 1f);
+        oRT.anchoredPosition = new Vector2(0, -748);
+        oRT.sizeDelta = new Vector2(800, 36);
+        originGO.GetComponent<TextMeshProUGUI>().raycastTarget = false;
 
-        var hint = NewText("Hint", card, "↑  Slide up to send", 24, FontStyles.Bold,
+        // Hint (bottom, pulsing)
+        var hintGO = NewText("Hint", card, "↑  Slide up to send", 26, FontStyles.Bold,
             new Color(1f, 0.6f, 0.4f), TextAlignmentOptions.Center);
-        hint.AddComponent<LayoutElement>().preferredHeight = 40;
-        hint.GetComponent<TextMeshProUGUI>().DOFade(0.3f, 0.8f).SetLoops(-1, LoopType.Yoyo);
+        var hRT = hintGO.GetComponent<RectTransform>();
+        hRT.anchorMin = new Vector2(0.5f, 0f); hRT.anchorMax = new Vector2(0.5f, 0f);
+        hRT.pivot = new Vector2(0.5f, 0f);
+        hRT.anchoredPosition = new Vector2(0, 20);
+        hRT.sizeDelta = new Vector2(800, 40);
+        var hintTMP = hintGO.GetComponent<TextMeshProUGUI>();
+        hintTMP.raycastTarget = false;
+        hintTMP.DOFade(0.3f, 0.8f).SetLoops(-1, LoopType.Yoyo);
 
-        // Make the card draggable
+        // Drag handler on the card itself
         var drag = card.AddComponent<DishCardDragger>();
         drag.Init(this, swipeDistanceThreshold);
 
@@ -462,26 +592,49 @@ public class DishComposer : MonoBehaviour
         }
 
         Vector2 size = _mapRT.rect.size;
-        Vector2 originPx = new Vector2((normOrigin.x - 0.5f) * size.x, (normOrigin.y - 0.5f) * size.y);
-        Vector2 destPx = new Vector2((normDest.x - 0.5f) * size.x, (normDest.y - 0.5f) * size.y);
+        Vector2 originPx = NormToPx(normOrigin, size);
+        Vector2 destPx   = NormToPx(normDest, size);
 
-        // Route line (a thin Image stretched between two points)
-        var line = NewRect("RouteLine", _overlayLayer);
-        var lImg = line.AddComponent<Image>();
-        lImg.color = new Color(1f, 0.85f, 0.4f, 0.85f);
-        var lrt = line.GetComponent<RectTransform>();
-        lrt.anchorMin = lrt.anchorMax = lrt.pivot = new Vector2(0.5f, 0.5f);
-        Vector2 dir = destPx - originPx;
-        float len = dir.magnitude;
-        lrt.sizeDelta = new Vector2(0, 4);
-        lrt.anchoredPosition = (originPx + destPx) * 0.5f;
-        lrt.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
-        lImg.DOFade(0.85f, 0.4f).From(0f);
-        lrt.DOSizeDelta(new Vector2(len, 4), 0.5f).SetEase(Ease.OutQuad);
+        // Build the full normalized control polyline: origin → user waypoints (if any) → dest.
+        // Then sample as Catmull-Rom for smooth curves.
+        // 完整路径 = 起点 + 用户配的中间点 + 终点；按 Catmull-Rom 平滑。
+        var ctlPx = new List<Vector2> { originPx };
+        if (mapCoords != null && mapCoords.TryGetRoute(origin, dest, out var wps))
+        {
+            foreach (var w in wps) ctlPx.Add(NormToPx(w, size));
+        }
+        else
+        {
+            // No user route configured → automatic Bezier-style arc (single mid waypoint).
+            // 没配 → 用 quadratic-bezier 风格,加一个北向中点作为 waypoint。
+            Vector2 mid = (originPx + destPx) * 0.5f;
+            Vector2 dir = destPx - originPx;
+            float len = dir.magnitude;
+            Vector2 perp = len > 0.001f ? new Vector2(-dir.y, dir.x).normalized : Vector2.up;
+            if (perp.y < 0) perp = -perp;
+            float arcHeight = Mathf.Clamp(len * 0.28f, 60f, 600f);
+            ctlPx.Add(mid + perp * arcHeight);
+        }
+        ctlPx.Add(destPx);
 
-        // Origin + destination markers
+        // Sample curve into dense path points for both the line drawing and the caravan motion.
+        const int SamplesPerSegment = 16;
+        var samples = SampleCatmullRom(ctlPx, SamplesPerSegment);
+
+        // Markers
         AddMarker(originPx, new Color(1f, 0.85f, 0.4f), origin.ToString());
-        AddMarker(destPx, new Color(1f, 0.5f, 0.3f), dest.ToString());
+        AddMarker(destPx,   new Color(1f, 0.5f,  0.3f), dest.ToString());
+
+        // Draw the route progressively: each segment between samples fades in staggered.
+        // 路径逐段淡入，形成"被画出来"的感觉。
+        float drawWindow = Mathf.Max(0.2f, duration * 0.6f);
+        float perSegmentDelay = samples.Count > 1 ? drawWindow / (samples.Count - 1) : 0f;
+        for (int i = 1; i < samples.Count; i++)
+        {
+            var img = AddRouteSegment(samples[i - 1], samples[i]);
+            img.color = new Color(1f, 0.85f, 0.4f, 0f);
+            img.DOFade(0.85f, 0.18f).SetDelay((i - 1) * perSegmentDelay);
+        }
 
         // Caravan
         var car = NewRect("Caravan", _overlayLayer);
@@ -492,14 +645,95 @@ public class DishComposer : MonoBehaviour
         var crt = car.GetComponent<RectTransform>();
         crt.anchorMin = crt.anchorMax = crt.pivot = new Vector2(0.5f, 0.5f);
         crt.sizeDelta = new Vector2(40, 40);
-        crt.anchoredPosition = originPx;
-        crt.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+        crt.anchoredPosition = samples[0];
+        Vector2 firstTangent = samples.Count > 1 ? (samples[1] - samples[0]) : Vector2.right;
+        crt.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(firstTangent.y, firstTangent.x) * Mathf.Rad2Deg);
 
-        DOVirtual.DelayedCall(0.5f, () =>
+        // Animate caravan along sampled path. t∈[0,1] → index in samples.
+        // 沿采样点移动，t 0→1 直接映射到 samples 索引区间。
+        DOVirtual.DelayedCall(0.4f, () =>
         {
-            crt.DOAnchorPos(destPx, duration - 0.5f).SetEase(Ease.InOutSine)
-                .OnComplete(() => onDone?.Invoke());
+            float travelTime = Mathf.Max(0.5f, duration - 0.4f);
+            float prog = 0f;
+            DOTween.To(() => prog, x =>
+            {
+                prog = x;
+                float fIdx = prog * (samples.Count - 1);
+                int i0 = Mathf.Clamp(Mathf.FloorToInt(fIdx), 0, samples.Count - 2);
+                int i1 = i0 + 1;
+                float ft = fIdx - i0;
+                Vector2 p = Vector2.Lerp(samples[i0], samples[i1], ft);
+                crt.anchoredPosition = p;
+                Vector2 tan = samples[i1] - samples[i0];
+                if (tan.sqrMagnitude > 0.0001f)
+                    crt.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(tan.y, tan.x) * Mathf.Rad2Deg);
+            }, 1f, travelTime).SetEase(Ease.InOutSine).OnComplete(() => onDone?.Invoke());
         });
+    }
+
+    private static Vector2 NormToPx(Vector2 norm, Vector2 mapSize) =>
+        new Vector2((norm.x - 0.5f) * mapSize.x, (norm.y - 0.5f) * mapSize.y);
+
+    /// <summary>Sample a uniform Catmull-Rom spline through the given control points (must have ≥ 2).</summary>
+    public static List<Vector2> SampleCatmullRom(List<Vector2> ctl, int samplesPerSegment)
+    {
+        var result = new List<Vector2>();
+        if (ctl == null || ctl.Count == 0) return result;
+        if (ctl.Count == 1) { result.Add(ctl[0]); return result; }
+
+        // Pad endpoints so first/last segments work with 4-point Catmull-Rom.
+        var p = new List<Vector2>(ctl.Count + 2);
+        p.Add(ctl[0] + (ctl[0] - ctl[1]));        // ghost before
+        p.AddRange(ctl);
+        p.Add(ctl[ctl.Count - 1] + (ctl[ctl.Count - 1] - ctl[ctl.Count - 2])); // ghost after
+
+        result.Add(ctl[0]);
+        for (int i = 0; i < ctl.Count - 1; i++)
+        {
+            Vector2 p0 = p[i], p1 = p[i + 1], p2 = p[i + 2], p3 = p[i + 3];
+            for (int s = 1; s <= samplesPerSegment; s++)
+            {
+                float t = s / (float)samplesPerSegment;
+                result.Add(CatmullRom(p0, p1, p2, p3, t));
+            }
+        }
+        return result;
+    }
+
+    private static Vector2 CatmullRom(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3, float t)
+    {
+        float t2 = t * t, t3 = t2 * t;
+        return 0.5f * (
+            2f * p1 +
+            (-p0 + p2) * t +
+            (2f * p0 - 5f * p1 + 4f * p2 - p3) * t2 +
+            (-p0 + 3f * p1 - 3f * p2 + p3) * t3
+        );
+    }
+
+    private Image AddRouteSegment(Vector2 a, Vector2 b)
+    {
+        var seg = NewRect("RouteSeg", _overlayLayer);
+        var img = seg.AddComponent<Image>();
+        var rt = seg.GetComponent<RectTransform>();
+        rt.anchorMin = rt.anchorMax = rt.pivot = new Vector2(0.5f, 0.5f);
+        Vector2 dir = b - a;
+        float len = dir.magnitude;
+        rt.sizeDelta = new Vector2(len, 4f);
+        rt.anchoredPosition = (a + b) * 0.5f;
+        rt.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+        return img;
+    }
+
+    private static Vector2 QuadraticBezier(Vector2 p0, Vector2 p1, Vector2 p2, float t)
+    {
+        float u = 1f - t;
+        return u * u * p0 + 2f * u * t * p1 + t * t * p2;
+    }
+
+    private static Vector2 QuadraticTangent(Vector2 p0, Vector2 p1, Vector2 p2, float t)
+    {
+        return 2f * (1f - t) * (p1 - p0) + 2f * t * (p2 - p1);
     }
 
     private void AddMarker(Vector2 anchoredPos, Color color, string label)
@@ -648,6 +882,7 @@ public class DishComposer : MonoBehaviour
         var tmp = go.AddComponent<TextMeshProUGUI>();
         tmp.text = text; tmp.fontSize = size; tmp.fontStyle = style; tmp.color = color; tmp.alignment = align;
         tmp.richText = true;
+        UIFont.Apply(tmp);
         return go;
     }
 

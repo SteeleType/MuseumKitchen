@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: MoghrabiyehCinnamon
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Moghrabiyeh
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: 7957449947183792654, guid: 6f17594e461aaa14a9784039c93e3a23, type: 3}
   countryOfOrigin: Lebanon
   region: 3
   spice: 2
   cookingMethod: 1
   distanceTraveled: 3300
+  spiceOrigin: 1

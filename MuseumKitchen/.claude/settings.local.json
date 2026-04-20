@@ -14,7 +14,11 @@
       "Bash(mv \"c:/Users/19709/Documents/GitHub/MuseumKitchen/MuseumKitchen/Assets/Scripts/Potluck Scriptable Objects/SOs\"/*.asset \"c:/Users/19709/Documents/GitHub/MuseumKitchen/MuseumKitchen/Assets/Resources/Dishes/\")",
       "Bash(mv \"c:/Users/19709/Documents/GitHub/MuseumKitchen/MuseumKitchen/Assets/Scripts/Potluck Scriptable Objects/SOs\"/*.meta \"c:/Users/19709/Documents/GitHub/MuseumKitchen/MuseumKitchen/Assets/Resources/Dishes/\")",
       "Bash(git checkout *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git restore *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git merge *)",
+      "Bash(git commit *)"
     ]
   }
 }

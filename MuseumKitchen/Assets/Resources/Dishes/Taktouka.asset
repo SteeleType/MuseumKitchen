@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Taktouka
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Taktouka
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: -4452618659927132466, guid: 7219bbe062860c445b9fc9b181400f5b, type: 3}
   countryOfOrigin: Morocco
   region: 4
   spice: 0
   cookingMethod: 1
   distanceTraveled: 5200
+  spiceOrigin: 0

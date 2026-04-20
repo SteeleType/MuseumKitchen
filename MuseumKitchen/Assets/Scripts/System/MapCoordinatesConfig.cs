@@ -18,6 +18,15 @@ public class MapCoordinatesConfig : ScriptableObject
     [Serializable] public struct RegionPoint   { public Region region; public Vector2 normalizedPos; public float zoom; }
     [Serializable] public struct SpicePoint    { public SpiceOrigin origin; public Vector2 normalizedPos; }
 
+    /// <summary>One trade route from a Spice Origin to a destination Region. Waypoints are normalized 0..1 map coords (excluding origin & destination, those are looked up separately).</summary>
+    [Serializable]
+    public class SpiceRoute
+    {
+        public SpiceOrigin from;
+        public Region to;
+        public List<Vector2> waypoints = new List<Vector2>();
+    }
+
     [Tooltip("Zoom factor when focused on a Region (e.g. 2.5 = 2.5x).\n聚焦 Region 时的缩放倍数。")]
     public float defaultRegionZoom = 2.5f;
 
@@ -40,6 +49,33 @@ public class MapCoordinatesConfig : ScriptableObject
         new SpicePoint { origin = SpiceOrigin.Indonesia,     normalizedPos = new Vector2(0.80f, 0.45f) },
         new SpicePoint { origin = SpiceOrigin.Mediterranean, normalizedPos = new Vector2(0.54f, 0.62f) },
     };
+
+    [Header("Spice Trade Routes (waypoints between Origin and Region; one-way)")]
+    public List<SpiceRoute> spiceRoutes = new List<SpiceRoute>();
+
+    public bool TryGetRoute(SpiceOrigin from, Region to, out List<Vector2> waypoints)
+    {
+        foreach (var r in spiceRoutes)
+        {
+            if (r.from == from && r.to == to)
+            {
+                waypoints = r.waypoints;
+                return waypoints != null && waypoints.Count > 0;
+            }
+        }
+        waypoints = null;
+        return false;
+    }
+
+    /// <summary>Get-or-create a SpiceRoute for the (from,to) pair. Used by the editor window.</summary>
+    public SpiceRoute GetOrCreateRoute(SpiceOrigin from, Region to)
+    {
+        foreach (var r in spiceRoutes)
+            if (r.from == from && r.to == to) return r;
+        var nr = new SpiceRoute { from = from, to = to };
+        spiceRoutes.Add(nr);
+        return nr;
+    }
 
     public bool TryGetRegion(Region r, out RegionPoint point)
     {

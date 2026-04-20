@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: AyamGoreng
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Ayam Goreng Kunyit
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: 2056354308832497044, guid: 33ae94eb31a999c41af3eb185e7123fa, type: 3}
   countryOfOrigin: Malaysia
   region: 1
   spice: 6
   cookingMethod: 2
   distanceTraveled: 2000
+  spiceOrigin: 0

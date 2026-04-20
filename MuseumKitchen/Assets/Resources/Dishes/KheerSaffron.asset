@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: KheerSaffron
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Kheer
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: 2830294630736917533, guid: f2b3aa9f243e0a645b8e3f48f8e90fb7, type: 3}
   countryOfOrigin: Nepal
   region: 2
   spice: 5
   cookingMethod: 1
   distanceTraveled: 2000
+  spiceOrigin: 2

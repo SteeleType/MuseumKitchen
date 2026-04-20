@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: PhoCinnamon
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Pho
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: 7874030385064390074, guid: b65a0d310ad90e846b3884a138dcaa35, type: 3}
   countryOfOrigin: Vietnam
   region: 1
   spice: 2
   cookingMethod: 1
   distanceTraveled: 1000
+  spiceOrigin: 1

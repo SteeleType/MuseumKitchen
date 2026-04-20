@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: KuruFasulye
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: KuruFasulye
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: -7542684950099451465, guid: 6019d05ba5a13b749b135e8cd774c49d, type: 3}
   countryOfOrigin: Turkey
   region: 3
   spice: 0
   cookingMethod: 1
   distanceTraveled: 2800
+  spiceOrigin: 0

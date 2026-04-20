@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Pastilla
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Pastilla
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: -1662792737713817434, guid: e369122c10c00ed44bd1598b0fb710e4, type: 3}
   countryOfOrigin: Morocco
   region: 4
   spice: 6
   cookingMethod: 2
   distanceTraveled: 5000
+  spiceOrigin: 0

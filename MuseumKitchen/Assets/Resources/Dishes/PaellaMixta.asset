@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: PaellaMixta
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Paella Mixta
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: 5954324160974538530, guid: 4bfdaef63734f8b4c9eec709c8ca76ac, type: 3}
   countryOfOrigin: Spain
   region: 0
   spice: 5
   cookingMethod: 2
   distanceTraveled: 3200
+  spiceOrigin: 2

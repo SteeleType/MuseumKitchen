@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: KheerCardomom
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Kheer
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: -807807742128001010, guid: 86d53c389b3123846ac99ac69a282094, type: 3}
   countryOfOrigin: Nepal
   region: 2
   spice: 1
   cookingMethod: 1
   distanceTraveled: 600
+  spiceOrigin: 0

@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Tagine
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Tagine
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: -7898578971396405113, guid: 9ad773bbea549f84596c65f23733e29d, type: 3}
   countryOfOrigin: Morocco
   region: 4
   spice: 5
   cookingMethod: 1
   distanceTraveled: 3000
+  spiceOrigin: 2

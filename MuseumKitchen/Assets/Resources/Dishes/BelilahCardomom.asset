@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: BelilahCardomom
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Belilah
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: 21300000, guid: af430f7f213a0ab48ab5e1f4f07ab779, type: 3}
   countryOfOrigin: Egypt
   region: 4
   spice: 1
   cookingMethod: 1
   distanceTraveled: 3000
+  spiceOrigin: 0

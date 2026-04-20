@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: JeeraAloo
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Jeera Aloo
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: -2620825200250007388, guid: ba25a68b19a4a574590f19c1f64592f6, type: 3}
   countryOfOrigin: India
   region: 2
   spice: 4
   cookingMethod: 2
   distanceTraveled: 4300
+  spiceOrigin: 4

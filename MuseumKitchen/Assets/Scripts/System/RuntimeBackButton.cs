@@ -53,5 +53,6 @@ public class RuntimeBackButton : MonoBehaviour
         tmp.alignment = TextAlignmentOptions.Center;
         tmp.fontSize = 22;
         tmp.color = Color.white;
+        UIFont.Apply(tmp);
     }
 }

@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: ChickenAdobo
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Chicken Adobo
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: -5538195652929995238, guid: 13bf0a6801e134f46b4f87884773d899, type: 3}
   countryOfOrigin: Phillipines
   region: 3
   spice: 0
   cookingMethod: 1
   distanceTraveled: 3000
+  spiceOrigin: 0

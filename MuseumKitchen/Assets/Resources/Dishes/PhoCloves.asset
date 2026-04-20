@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: PhoCloves
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Pho
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: 7653327611613537847, guid: c297c9d42881ce742805b380502f00a7, type: 3}
   countryOfOrigin: Vietnam
   region: 1
   spice: 3
   cookingMethod: 1
   distanceTraveled: 1000
+  spiceOrigin: 3

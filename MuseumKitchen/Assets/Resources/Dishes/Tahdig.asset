@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Tahdig
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Tahdig
-  dishSprite: {fileID: 0}
+  dishSprite: {fileID: 8443533991221709178, guid: ea842bf2c7846fb44b1af3362dfb3cce, type: 3}
   countryOfOrigin: Iran
   region: 3
   spice: 5
   cookingMethod: 1
   distanceTraveled: 0
+  spiceOrigin: 2
