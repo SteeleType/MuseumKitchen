@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: KheerCardomom
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Kheer
-  dishSprite: {fileID: -807807742128001010, guid: 86d53c389b3123846ac99ac69a282094, type: 3}
+  dishSprite: {fileID: 21300000, guid: 691b3f2ffdea4c72bcf24a6811589713, type: 3}
   countryOfOrigin: Nepal
   region: 2
   spice: 1

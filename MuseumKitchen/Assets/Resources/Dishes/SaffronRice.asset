@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SaffronRice
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Saffron Rice
-  dishSprite: {fileID: 3265087857467704664, guid: d273c36eb293ce14982b3e14ca7040f3, type: 3}
+  dishSprite: {fileID: 21300000, guid: 2d5f45ae68a54c80a915d33d64d2a277, type: 3}
   countryOfOrigin: Thailand
   region: 1
   spice: 5

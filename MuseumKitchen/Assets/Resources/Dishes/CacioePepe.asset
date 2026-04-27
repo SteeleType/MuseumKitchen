@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CacioePepe
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Cacio e Pepe
-  dishSprite: {fileID: 4858959279720510917, guid: f59664037f5afce4b8b030bc89cefd70, type: 3}
+  dishSprite: {fileID: 21300000, guid: 671e39bdad4c4926b21977d0fe19a130, type: 3}
   countryOfOrigin: Italy
   region: 0
   spice: 0

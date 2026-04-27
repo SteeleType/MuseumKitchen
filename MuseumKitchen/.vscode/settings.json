@@ -1,6 +1,7 @@
 {
     "dotnet.defaultSolution": "MuseumKitchen.sln",
     "dotnet.dotnetPath": "C:/Program Files/dotnet/dotnet.exe",
+    "dotrush.roslyn.dotnetSdkDirectory": "C:/Program Files/dotnet/sdk/10.0.201",
     "dotrush.msbuildProperties": {
         "DefineConstants": "UNITY_EDITOR"
     },

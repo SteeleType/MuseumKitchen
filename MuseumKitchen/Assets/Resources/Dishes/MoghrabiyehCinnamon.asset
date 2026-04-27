@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MoghrabiyehCinnamon
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Moghrabiyeh
-  dishSprite: {fileID: 7957449947183792654, guid: 6f17594e461aaa14a9784039c93e3a23, type: 3}
+  dishSprite: {fileID: 21300000, guid: 6cd0f6ed1dd14356884a21103b7e2b12, type: 3}
   countryOfOrigin: Lebanon
   region: 3
   spice: 2

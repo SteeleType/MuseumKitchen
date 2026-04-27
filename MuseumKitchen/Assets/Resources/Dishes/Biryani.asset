@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Biryani
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Biryani
-  dishSprite: {fileID: 1283093654858766340, guid: 12d3a6c8f83091c4a9597fcb3126c882, type: 3}
+  dishSprite: {fileID: 21300000, guid: 33bd03d46ff2485c8aa218c96643c3e9, type: 3}
   countryOfOrigin: India
   region: 2
   spice: 5

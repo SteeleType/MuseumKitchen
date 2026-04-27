@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bamia
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Bamia
-  dishSprite: {fileID: 21300000, guid: 395573e0bbb95744c8befe934996b3cd, type: 3}
+  dishSprite: {fileID: 21300000, guid: 57133c3ceddb4d249239594b09132ec8, type: 3}
   countryOfOrigin: Egypt
   region: 4
   spice: 0

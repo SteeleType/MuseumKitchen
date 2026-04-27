@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RisottoAllaCurcuma
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Risotto alla Curcuma
-  dishSprite: {fileID: 7938304153932768501, guid: 5f50cfd781d0a8c4897c0a2897644cbf, type: 3}
+  dishSprite: {fileID: 21300000, guid: 16750e685803416c9886e0a21e8c0c42, type: 3}
   countryOfOrigin: Italy
   region: 0
   spice: 6

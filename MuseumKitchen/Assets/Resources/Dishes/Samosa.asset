@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Samosa
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Samosa
-  dishSprite: {fileID: -2920718168878195541, guid: 9c6dd2be70cdf964882600d78b15944e, type: 3}
+  dishSprite: {fileID: 21300000, guid: a2328080d2704b53a33b853a8d8481eb, type: 3}
   countryOfOrigin: India
   region: 2
   spice: 6

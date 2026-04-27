@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pastilla
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Pastilla
-  dishSprite: {fileID: -1662792737713817434, guid: e369122c10c00ed44bd1598b0fb710e4, type: 3}
+  dishSprite: {fileID: 21300000, guid: 9f8e801ca0ea4cc9b777de1f09009b4d, type: 3}
   countryOfOrigin: Morocco
   region: 4
   spice: 6

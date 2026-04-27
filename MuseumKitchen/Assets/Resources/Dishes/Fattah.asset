@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fattah
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Fattah
-  dishSprite: {fileID: 6481113358632652315, guid: ac2efaad7e305414c8757ac01bdabe40, type: 3}
+  dishSprite: {fileID: 21300000, guid: 1298b7804eb747ad881096eebb361469, type: 3}
   countryOfOrigin: Egypt
   region: 4
   spice: 1

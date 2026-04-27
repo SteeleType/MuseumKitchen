@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Taktouka
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Taktouka
-  dishSprite: {fileID: -4452618659927132466, guid: 7219bbe062860c445b9fc9b181400f5b, type: 3}
+  dishSprite: {fileID: 21300000, guid: 4675e905be7a4570b00311ea6fa51f4b, type: 3}
   countryOfOrigin: Morocco
   region: 4
   spice: 0

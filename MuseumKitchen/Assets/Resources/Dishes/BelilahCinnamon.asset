@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BelilahCinnamon
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Belilah
-  dishSprite: {fileID: 21300000, guid: 55a7f7c66cf69d449b8ae91554b3c69a, type: 3}
+  dishSprite: {fileID: 21300000, guid: db6cfd8837e1482fb69cafb6755b0732, type: 3}
   countryOfOrigin: Egypt
   region: 4
   spice: 2

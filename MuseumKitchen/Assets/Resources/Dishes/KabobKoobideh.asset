@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: KabobKoobideh
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Kabob Koobideh
-  dishSprite: {fileID: 5432810541662538734, guid: 38b45d544e6d17740aef8663fd6a480a, type: 3}
+  dishSprite: {fileID: 21300000, guid: 96a3686c79f64dfa99f71cf20a51e8cb, type: 3}
   countryOfOrigin: Iran
   region: 3
   spice: 4

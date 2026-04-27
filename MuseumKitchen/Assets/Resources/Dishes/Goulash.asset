@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Goulash
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Goulash
-  dishSprite: {fileID: 3212782590555193693, guid: 01d1d0bb82108bb4ea8b2b6fb644f65d, type: 3}
+  dishSprite: {fileID: 21300000, guid: c15ba9db1d324cc08a22f78f64186a37, type: 3}
   countryOfOrigin: Hungary
   region: 0
   spice: 4

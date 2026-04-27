@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SteakPoivre
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Steak au Poivre
-  dishSprite: {fileID: -1359001572929099250, guid: 55b146910a0d52547b8247b0080e26ab, type: 3}
+  dishSprite: {fileID: 21300000, guid: b09ed185fc554d14a3e34b6393e6dc00, type: 3}
   countryOfOrigin: France
   region: 0
   spice: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ChickenPilou
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   dishName: Chicken Pilou
-  dishSprite: {fileID: -7389281812161968577, guid: eaa0a4c0f65c96045aa8439242121c74, type: 3}
+  dishSprite: {fileID: 21300000, guid: 221ab357208f4138892870f2e24821ba, type: 3}
   countryOfOrigin: India
   region: 2
   spice: 0
