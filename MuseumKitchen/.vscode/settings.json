@@ -1,12 +1,12 @@
 {
     "dotnet.defaultSolution": "MuseumKitchen.sln",
-    "dotnet.dotnetPath": "C:/Program Files/dotnet/dotnet.exe",
-    "dotrush.roslyn.dotnetSdkDirectory": "C:/Program Files/dotnet/sdk/10.0.201",
+    "dotnet.dotnetPath": "/usr/local/share/dotnet/dotnet",
+    "dotrush.roslyn.dotnetSdkDirectory": "/usr/local/share/dotnet/sdk/8.0.100",
     "dotrush.msbuildProperties": {
         "DefineConstants": "UNITY_EDITOR"
     },
     "dotrush.roslyn.projectOrSolutionFiles": [
-        "C:/Users/19709/Documents/GitHub/MuseumKitchen/MuseumKitchen/MuseumKitchen.sln"
+        "/Users/christinemi/Documents/NYU/Code Lab 2/MuseumKitchen/MuseumKitchen/MuseumKitchen.sln"
     ],
     "dotrush.roslyn.restoreProjectsBeforeLoading": false,
     "files.exclude": {

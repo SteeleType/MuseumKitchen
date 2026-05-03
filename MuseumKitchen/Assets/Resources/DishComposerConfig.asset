@@ -29,8 +29,8 @@ MonoBehaviour:
   spiceSubtitle: Every journey starts at its source.
   distanceTitle: How far should {spice} travel?
   distanceSubtitle: Pick a journey length.
-  cookingTitle: How do they cook in {destination}?
-  cookingSubtitle: Pick a method.
+  cookingTitle: How should we cook this dish?
+  cookingSubtitle: Pick a cooking method.
   cookButtonLabel: Cook!
   chefLabel: 'Chef:'
   chefPlaceholder: 
